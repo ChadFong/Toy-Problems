@@ -19,7 +19,7 @@ Global
 		Policies = $0
 		$0.TextStylePolicy = $1
 		$1.EolMarker = Windows
-		$1.inheritsSet = Mono
+		$1.inheritsSet = VisualStudio
 		$1.inheritsScope = text/plain
 		$1.scope = text/x-csharp
 		$0.CSharpFormattingPolicy = $2
@@ -33,5 +33,8 @@ Global
 		$3.inheritsSet = VisualStudio
 		$3.inheritsScope = text/plain
 		$3.scope = text/plain
+		$0.DotNetNamingPolicy = $4
+		$4.DirectoryNamespaceAssociation = None
+		$4.ResourceNamePolicy = FileFormatDefault
 	EndGlobalSection
 EndGlobal
