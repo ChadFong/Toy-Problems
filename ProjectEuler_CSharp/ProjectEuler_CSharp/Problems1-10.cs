@@ -6,7 +6,8 @@ namespace ProjectEuler_CSharp
 {
 	public class Problems_1_Thru_10
 	{
-		public static int Prob1_Multiples3and5 ()
+//		Problem #1:
+		public static int Multiples3and5 ()
 		{
 //			If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. 
 //			The sum of these multiples is 23.

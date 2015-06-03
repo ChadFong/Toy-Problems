@@ -10,7 +10,7 @@ namespace ProjectEuler_CSharp
 		}
 		private static void Check_1_Thru_10 ()
 		{
-			Console.WriteLine ("001: Sum should equal 233168: {0}", Problems_1_Thru_10.Prob1_Multiples3and5 () == 233168);
+			Console.WriteLine ("001: Sum should equal 233168: {0}", Problems_1_Thru_10.Multiples3and5 () == 233168);
 		}
 	}
 }
