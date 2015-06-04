@@ -49,5 +49,63 @@ namespace ProjectEuler_CSharp
 			}
             return result;
 		}
+
+//      Problem #3:
+        public static long LargestPrime(long num)
+        {
+//          The prime factors of 13195 are 5, 7, 13 and 29.
+//          What is the largest prime factor of the number 600851475143 ?
+
+            // A factor can be no greater than 1/2 of the value.
+            // A prime is divisible only by 1 and itself.
+                // We can start at 1/2 and manually test each number below half for prime, or we can implement a Sieve of Erasthones, and pull the highest value.
+
+            // Largest number that can potentially be a prime is the odd number immediately less than num / 2
+            long start = (long)Math.Floor((double)num / 2);
+            start = num % 2 == 0 ? num/2 - 1 : start % 2 == 0 ? start : start - 1;
+
+            return 0;
+        }
+
+        public static List<long> SieveOfErasthones(long start, long end)
+        {
+            // Ensures 2 gets added as a prime
+            Dictionary<long, long> primes = new Dictionary<long, long>();
+            LinkedList<long> options = new LinkedList<long>();
+            if( start <= 2 )
+            {
+                primes.Add(2, 2);
+                start = 3;
+            }
+
+            // Adds all odd numbers to the list (even numbers cannot be prime).
+            while( start <= end )
+            {
+                // Skip even values
+                if( start % 2 == 0 )
+                {
+                    start++;
+                }
+                options.AddLast(start);
+                primes.Add(start, start);
+                // Since we have assured that we start at an odd number, we can just check every otherz
+                start += 2;
+            }
+
+            // Dictionary primes now contains odd numbers that are potentially prime in our range.
+                // We now want to remove every number that has a factor in the sieve.
+            foreach(long num in options)
+            {
+                for( long i = 2 ; i * num <= end ; i++ )
+                {
+                    if( primes.ContainsKey(num * i) )
+                    {
+                        primes.Remove(num * i);
+                    }
+                }
+            }
+            // Return the primes in a Linked List.
+            return primes.Values.ToList();
+        }
 	}
 }
