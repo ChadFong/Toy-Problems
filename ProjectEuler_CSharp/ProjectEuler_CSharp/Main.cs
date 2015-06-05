@@ -8,14 +8,11 @@ namespace ProjectEuler_CSharp
 		public static void Main (string[] args)
 		{
 //			Check_1_Thru_10 ();
-            List<long> test = Problems_1_Thru_10.SieveOfErasthones(2, 100);
-            string logThis = "";
-            foreach(long entry in test)
-            {
-                logThis += entry + ",";
-            }
-            Console.WriteLine(logThis);
-//            Console.WriteLine(Problems_1_Thru_10.LargestPrime(600851475143);
+//            Console.WriteLine (Problems_1_Thru_10.LargestPrime(600851475143) );
+//            Console.Write (Problems_1_Thru_10.LargestPrime(88));
+            long test = 9223372036854775807;
+            Console.WriteLine(Problems_1_Thru_10.LargestPrime(test));
+            Console.WriteLine ("Easy solution: {0}", Problems_1_Thru_10.altLgPrimeFactor(test));  
 		}
 		private static void Check_1_Thru_10 ()
 		{

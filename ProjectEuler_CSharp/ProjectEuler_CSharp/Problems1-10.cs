@@ -51,61 +51,94 @@ namespace ProjectEuler_CSharp
 		}
 
 //      Problem #3:
-        public static long LargestPrime(long num)
+        public static uint LargestPrime(long n)
         {
 //          The prime factors of 13195 are 5, 7, 13 and 29.
 //          What is the largest prime factor of the number 600851475143 ?
 
-            // A factor can be no greater than 1/2 of the value.
-            // A prime is divisible only by 1 and itself.
-                // We can start at 1/2 and manually test each number below half for prime, or we can implement a Sieve of Erasthones, and pull the highest value.
+            uint largestPrimeFactor = 1;
 
-            // Largest number that can potentially be a prime is the odd number immediately less than num / 2
-            long start = (long)Math.Floor((double)num / 2);
-            start = num % 2 == 0 ? num/2 - 1 : start % 2 == 0 ? start : start - 1;
+            // In order to determine all prime numbers from 0 to n, we only need to check them against
+            // values from 0 to √n.  If they are not divisible by any of these numbers, then they are prime.
+            uint sqrtN = (uint)Math.Floor (Math.Sqrt(n));
+            Console.WriteLine(sqrtN);
 
-            return 0;
-        }
+            // We create a filter list which contains all primes from 0 to √n. We can use this to check if a number
+            // between 0 and n is prime.
+              // We will start our List with 2, so that we only need to iterate on odd numbers.
+            List<uint> filter = new List<uint>(new uint[] {2});
 
-        public static List<long> SieveOfErasthones(long start, long end)
-        {
-            // Ensures 2 gets added as a prime
-            Dictionary<long, long> primes = new Dictionary<long, long>();
-            LinkedList<long> options = new LinkedList<long>();
-            if( start <= 2 )
+            // We create the filter list from 0 -> √n, the only numbers we need to check all future primes against.
+            for(uint i = 3 ; i <= sqrtN; i += 2)
             {
-                primes.Add(2, 2);
-                start = 3;
-            }
-
-            // Adds all odd numbers to the list (even numbers cannot be prime).
-            while( start <= end )
-            {
-                // Skip even values
-                if( start % 2 == 0 )
+                if( n % i == 0 )
                 {
-                    start++;
-                }
-                options.AddLast(start);
-                primes.Add(start, start);
-                // Since we have assured that we start at an odd number, we can just check every otherz
-                start += 2;
-            }
-
-            // Dictionary primes now contains odd numbers that are potentially prime in our range.
-                // We now want to remove every number that has a factor in the sieve.
-            foreach(long num in options)
-            {
-                for( long i = 2 ; i * num <= end ; i++ )
-                {
-                    if( primes.ContainsKey(num * i) )
+                    if( isPrime(filter, i) )
                     {
-                        primes.Remove(num * i);
+                        filter.Add(i);
+                        largestPrimeFactor = i > largestPrimeFactor ? i : largestPrimeFactor;
                     }
                 }
             }
-            // Return the primes in a Linked List.
-            return primes.Values.ToList();
+            for(uint i = 2 ; i < sqrtN ; i++ )
+            {
+                if( n % i == 0 ) 
+                {
+                    if( isPrime(filter, (n / i) ) )
+                    {
+                        largestPrimeFactor = n / i > largestPrimeFactor ? (uint)(n / i) : largestPrimeFactor;
+                        break;
+                    }
+                }
+                if( (n / i) < largestPrimeFactor )
+                {
+                    break;
+                }
+            }
+            return largestPrimeFactor;
+        }
+
+        private static bool isPrime (List<uint> filter, long query)
+        {
+            // Given a filter List of prime numbers from 0 to √n, isPrime will determine if a number from 0 to n is Prime
+            bool isPrime = true;
+            foreach(uint prime in filter)
+            {
+                if( query % prime == 0 )
+                {
+                    isPrime = false;
+                    break;
+                }
+            }
+            return isPrime;
+        }
+
+        private static bool isPrime (List<uint> filter, uint query)
+        {
+            // Given a filter List of prime numbers from 0 to √n, isPrime will determine if a number from 0 to n is Prime
+            bool isPrime = true;
+            foreach(uint prime in filter)
+            {
+                if( query % prime == 0 )
+                {
+                    isPrime = false;
+                    break;
+                }
+            }
+            return isPrime;
+        }
+
+        // Problem #3: Alternate solution
+        public static int altLgPrimeFactor (long n)
+        {
+            for( int i = 2 ; i < n ; i++ )
+            {
+                while( n % i == 0 )
+                {
+                    n = n/i;
+                }
+            }
+            return (int)n;
         }
 	}
 }
