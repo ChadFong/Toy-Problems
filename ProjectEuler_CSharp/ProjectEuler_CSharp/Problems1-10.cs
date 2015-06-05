@@ -195,5 +195,34 @@ namespace ProjectEuler_CSharp
             }
             return z;
         }
+
+        // Problem #5:
+        public static int smallestMultiple(int target)
+        {
+//          2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+//          What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+            int result = 20;
+            bool isMultiple = false;
+            while( !isMultiple )
+            {
+                for( int i = target - 1 ; i > 1 ; i-- )
+                {
+                    if( !(result % i == 0) )
+                    {
+                        break;
+                    }
+                    else if( i == 2 )
+                    {
+                        isMultiple = true;
+                    }
+                }
+                if( !isMultiple )
+                {
+                    result += 20;
+                }
+            }
+            return result;
+        }
 	}
 }
