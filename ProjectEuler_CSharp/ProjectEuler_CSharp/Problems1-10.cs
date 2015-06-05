@@ -61,7 +61,6 @@ namespace ProjectEuler_CSharp
             // In order to determine all prime numbers from 0 to n, we only need to check them against
             // values from 0 to √n.  If they are not divisible by any of these numbers, then they are prime.
             uint sqrtN = (uint)Math.Floor (Math.Sqrt(n));
-            Console.WriteLine(sqrtN);
 
             // We create a filter list which contains all primes from 0 to √n. We can use this to check if a number
             // between 0 and n is prime.
@@ -139,6 +138,62 @@ namespace ProjectEuler_CSharp
                 }
             }
             return (int)n;
+        }
+
+        // Problem #4: 
+        public static int LargestPalindromeProd () 
+        {
+//          A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+//          Find the largest palindrome made from the product of two 3-digit numbers.
+
+            // x * y = z, where z is a palindrome, x and y are both 3-digit numbers.
+
+            int z = 997799;
+            int[] palindrome = new int[] {9,9,7,7,9,9};
+            bool validPal = false;
+
+            while( !validPal )
+            {
+                for(int x = 999 ; x >= 100 ; x-- )
+                {
+                    if( z % x == 0 && (999 >= z/x && z/x >= 100) )
+                    {
+                        validPal = true;
+                        break;
+                    }
+                    // Since x is ALWAYS decrementing, y will always be incrementing.  Therefore we skip to the next x if y
+                    // ever exceeds 3 digits.
+                    if( z / x > 999 )
+                    {
+                        break;
+                    }
+                }
+
+                if( !validPal )
+                {
+                    if( palindrome[2] > 0 )
+                    {
+                        palindrome[2]--;
+                        palindrome[3]--;
+                    }
+                    else if( palindrome[1] > 0 )
+                    {
+                        palindrome[1]--;
+                        palindrome[4]--;
+                        palindrome[2] = 9;
+                        palindrome[3] = 9;
+                    }
+                    else
+                    {
+                        palindrome[0]--;
+                        palindrome[5]--;
+                        palindrome[1] = 9;
+                        palindrome[4] = 9;
+                    }
+                }
+                z = Int32.Parse(string.Join("", palindrome));
+            }
+            return z;
         }
 	}
 }

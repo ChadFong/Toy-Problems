@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectEuler_CSharp/Problems1-10.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectEuler_CSharp/Main.cs">
     <Files>
-      <File FileName="ProjectEuler_CSharp/Problems1-10.cs" Line="87" Column="22" />
-      <File FileName="ProjectEuler_CSharp/Main.cs" Line="11" Column="79" />
+      <File FileName="ProjectEuler_CSharp/Problems1-10.cs" Line="194" Column="18" />
+      <File FileName="ProjectEuler_CSharp/Main.cs" Line="11" Column="133" />
     </Files>
     <Pads>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
