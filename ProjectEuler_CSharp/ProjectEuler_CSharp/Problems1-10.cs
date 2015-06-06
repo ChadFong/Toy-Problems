@@ -224,5 +224,18 @@ namespace ProjectEuler_CSharp
             }
             return result;
         }
+
+        // Problem #6:
+        public static double sumSquareDifference (int target)
+        {
+            double sumSquares = 1, squareSum = 1;
+            for( int i = 2 ; i <= target ; i++ )
+            {
+                sumSquares += Math.Pow(i,2);
+                squareSum += i;
+                Console.WriteLine("sumSquares: {0}, squareSum: {1}, i: {2}", sumSquares, squareSum, i);
+            }
+            return Math.Pow (squareSum, 2) - sumSquares;
+        }
 	}
 }
