@@ -233,9 +233,29 @@ namespace ProjectEuler_CSharp
             {
                 sumSquares += Math.Pow(i,2);
                 squareSum += i;
-                Console.WriteLine("sumSquares: {0}, squareSum: {1}, i: {2}", sumSquares, squareSum, i);
             }
             return Math.Pow (squareSum, 2) - sumSquares;
+        }
+
+        // Problem #7:
+        public static double NthPrime (int n)
+        {
+//          By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+//          What is the 10 001st prime number?
+
+            // Also implement using the sieve refined in Problem 3
+            int count = 1;
+            List<uint> filter = new List<uint>(new uint[]{2});
+
+            for(uint i = 3 ; count < n ; i += 2 )
+            {
+                if( isPrime(filter, i) )
+                {
+                    filter.Add(i);
+                    count += 1;
+                }
+            }
+            return filter.Last();
         }
 	}
 }
