@@ -112,11 +112,11 @@ namespace ProjectEuler_CSharp
             return isPrime;
         }
 
-        private static bool isPrime (List<uint> filter, uint query)
+        private static bool isPrime (List<long> filter, long query)
         {
             // Given a filter List of prime numbers from 0 to √n, isPrime will determine if a number from 0 to n is Prime
             bool isPrime = true;
-            foreach(uint prime in filter)
+            foreach(long prime in filter)
             {
                 if( query % prime == 0 )
                 {
@@ -303,6 +303,32 @@ namespace ProjectEuler_CSharp
                 a++;
             }
             return result;
+        }
+
+        // Problem #10:
+        public static long primeSum()
+        {
+//          The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.              
+//          Find the sum of all the primes below two million.
+
+            long sum = 2;
+            List<long> filter = new List<long>(new long[] {2});
+            for( long i = 3 ; i < Math.Sqrt(2000000) ; i += 2 )
+            {
+                if( isPrime(filter, i) )
+                {
+                    filter.Add (i);
+                    sum += i;
+                }
+            }
+            for( long i = (long)Math.Floor (Math.Sqrt(2000000)) ; i < 2000000 ; i++)
+            {
+                if( isPrime(filter, i) )
+                {
+                    sum += i;
+                }
+            }
+            return sum;
         }
 	}
 }

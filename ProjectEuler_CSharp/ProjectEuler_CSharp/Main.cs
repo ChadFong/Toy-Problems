@@ -7,8 +7,7 @@ namespace ProjectEuler_CSharp
 	{
 		public static void Main (string[] args)
 		{
-//			Check_1_Thru_10 ();
-            Console.WriteLine ("009: Pythagorean Triplet which adds to 1000 has a product of 31875000? {0}", Problems_1_Thru_10.pythTriplet() == 31875000);
+			Check_1_Thru_10 ();
         }
         private static void Check_1_Thru_10 ()
         {
@@ -21,6 +20,7 @@ namespace ProjectEuler_CSharp
             Console.WriteLine ("007: 10,001st Prime is 104743? {0}", Problems_1_Thru_10.NthPrime(10001) == 104743);
             Console.WriteLine ("008: Largest product in Series is 23514624000? {0}", Problems_1_Thru_10.largestProductInSeries(13) == 23514624000);
             Console.WriteLine ("009: Pythagorean Triplet which adds to 1000 has a product of 31875000? {0}", Problems_1_Thru_10.pythTriplet() == 31875000);
+            Console.WriteLine ("010: Prime sums to 2000000 is 142913828922? {0}", Problems_1_Thru_10.primeSum() == 142913828922 );
         }
 	}
 }
