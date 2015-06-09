@@ -277,6 +277,33 @@ namespace ProjectEuler_CSharp
             }
             return maxProduct;
         }
+
+        // Problem #9:
+        public static int pythTriplet () {
+            int a = 1, b;
+            double c;
+            int result = 0;
+            while( result == 0 )
+            {
+                b = a + 1;
+                c = Math.Sqrt((Math.Pow (a, 2) + Math.Pow (b,2)));
+                while( a + b + c <= 1000 )
+                {
+                    c = Math.Sqrt((Math.Pow (a, 2) + Math.Pow (b,2)));
+                    if( a + b + c == 1000 && c % 1 == 0 && a < b && b < c )
+                    {
+                        result = a * b * (int)c;
+                        break;
+                    }
+                    else
+                    {
+                        b++;
+                    }
+                }
+                a++;
+            }
+            return result;
+        }
 	}
 }
 
