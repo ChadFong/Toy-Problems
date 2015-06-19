@@ -6,13 +6,13 @@
 // Let us list the factors of the first seven triangle numbers:
 
 // nth - n * (n/2 + 0.5) - result
-// 1st - 1 * 1 - 1 : 1
-// 2nd - 2 * 1.5 - 3: 1,3
-// 3rd - 3 * 2 - 6: 1,2,3,6
+// 1st - 1 * 1   -  1: 1
+// 2nd - 2 * 1.5 -  3: 1,3
+// 3rd - 3 * 2   -  6: 1,2,3,6
 // 4th - 4 * 2.5 - 10: 1,2,5,10
-// 5th - 5 * 3 - 15: 1,3,5,15
+// 5th - 5 * 3   - 15: 1,3,5,15
 // 6th - 6 * 3.5 - 21: 1,3,7,21
-// 7th - 7 * 4 - 28: 1,2,4,7,14,28
+// 7th - 7 * 4   - 28: 1,2,4,7,14,28
 // We can see that 28 is the first triangle number to have over five divisors.
 
 // What is the value of the first triangle number to have over five hundred divisors?
@@ -26,22 +26,27 @@ var nthTriangularNumber = function (nth) {
   return nth * (nth/2 + 0.5);
 };
 
-// Our divisor count starts at 2 because every number is divisible by itself and 1.
-// We then iterate over every divisor between n/2 (the largest possible number that can be divided into it)
-// and √n incrementing by 2.  (Each divisor found between n/2 and √n will have a partner between √n and 1).
-var divisibleTriangularNumber = function (desiredDivisorCount) {
-  var divisorCount = 2;
-  var n = 1, triN;
-  while(divisorCount < desiredDivisorCount){
-    n++;
-    divisorCount = 2;
-    triN = nthTriangularNumber(n);
-    for(var i = Math.floor(triN/2) ; i > Math.floor(Math.sqrt(triN)) + 1 ; i--) {
-      divisorCount = triN % i === 0 ? divisorCount + 2 : divisorCount;
-    }
-    divisorCount = Math.sqrt(triN) % 1 === 0 ? divisorCount + 1 : divisorCount;
-    console.log("n: " + n + " triangle: " + triN + " and divisors: " + divisorCount);
+var divisorCount = function (num) {
+  var count = 2; // 1 and num
+  // We only need to check for divisors from 1 to √n
+  if (num === 1) { return 1 ;}
+  for (var i = 2 ; i < Math.sqrt(num) ; i++) {
+    count += num % i === 0 ? 2 : 0;
   }
-  return triN;
+  count += Math.sqrt(num) % 1 === 0 ? 1 : 0;
+  return count;
 };
 
+var triangleNumberDivisors = function (desiredDivCnt) {
+  var currCount = 0;
+  var nth = 1;
+  if(desiredDivCnt === 1) {return 1;}
+
+  while (currCount < desiredDivCnt) {
+    nth++;
+    currCount = divisorCount(nthTriangularNumber(nth));
+  }
+  return nthTriangularNumber(nth);
+};
+
+console.log(triangleNumberDivisors(500));
