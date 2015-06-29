@@ -9,4 +9,32 @@ var numArrays = numStrings.map(function(numString) {
   });
 });
 
-console.log(numArrays);
+var summedArray = numArrays.reduce(function(total, current){
+  var i = total.length - 1;
+  var j = current.length - 1;
+  var carried = 0;
+  for( ; i >= 0 ; i--, j--) {
+    var sum = current[j] !== undefined ? total[i] + current[j] + carried : total[i] + carried;
+    if( sum < 10 ) {
+      total[i] = sum;
+      carried = 0;
+    } else {
+      total[i] = sum - 10;
+      carried = 1;
+    }
+    if( i === 0 && carried > 0 ) {
+      total.unshift(carried);
+    }
+  }
+  return total;
+});
+
+function readable (numArr) {
+  var str = "";
+  for(var i = 0 ; i < numArr.length ; i++ ) {
+    str+= numArr[i];
+  }
+  return str;
+}
+
+console.log(readable(summedArray));
