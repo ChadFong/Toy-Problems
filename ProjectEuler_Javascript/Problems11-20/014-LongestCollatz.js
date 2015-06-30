@@ -14,3 +14,21 @@
 
 // NOTE: Once the chain starts the terms are allowed to go above one million.
 
+function longestCollatz (max) {
+  var longest = 0, count = 0, num = 0;
+  for(var collatz = 2 ; collatz <= max ; collatz++) {
+    var n = collatz;
+    while(n > 1) {
+      count++;
+      n = n % 2 === 0 ? n/2 : 3*n + 1;
+    }
+    if(longest < count) {
+      longest = count;
+      num = collatz;
+    }
+    count = 0;
+  }
+  return num;
+}
+
+console.log(longestCollatz(1000000));
