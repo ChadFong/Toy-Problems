@@ -2,6 +2,12 @@ using System;
 
 public static class AppleStock
 {
+    // Given an array of stock prices for a day, find the maximum profit that could be made.
+        // You must buy before you sell, (no shorting).
+        // If the stock decreases all day, return least amount of money that could be lost.
+    
+    // Solved in O(n) time, and O(1) space complexities.
+    
     public static void Main()
     {
         Console.WriteLine(BestProfit(new int[] {500, 510, 485, 610, 700, 500, 900, 210, 400, 70}));
